@@ -84,12 +84,19 @@ var copyTemplate = function (_a) {
                     return [4 /*yield*/, fs.copy(from, to_1)];
                 case 3:
                     _e.sent();
-                    return [4 /*yield*/, fs.rename("".concat(to_1, "/ComponentName.stories.tsx"), "".concat(to_1, "/").concat(name, ".stories.tsx"))];
-                case 4:
-                    _e.sent();
                     fs.readFile("".concat(to_1, "/index.tsx"), 'utf8', function (err, data) {
                         var fileContents = data.replaceAll("ComponentName", name);
                         fs.writeFile("".concat(to_1, "/index.tsx"), fileContents, 'utf8', function (err) {
+                            if (err)
+                                return console.log(err);
+                        });
+                    });
+                    return [4 /*yield*/, fs.rename("".concat(to_1, "/ComponentName.stories.tsx"), "".concat(to_1, "/").concat(name, ".stories.tsx"))];
+                case 4:
+                    _e.sent();
+                    fs.readFile("".concat(to_1, "/").concat(name, ".stories.tsx"), 'utf8', function (err, data) {
+                        var fileContentsStory = data.replaceAll("ComponentName", name);
+                        fs.writeFile("".concat(to_1, "/").concat(name, ".stories.tsx"), fileContentsStory, 'utf8', function (err) {
                             if (err)
                                 return console.log(err);
                         });

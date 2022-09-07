@@ -1,14 +1,14 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import ComponentName from './index';
+import ComponentNameComponent from './index';
 
 export default {
-    title: 'Component',
-    component: ComponentName,
-} as ComponentMeta<typeof ComponentName>;
+    title: 'ComponentName',
+    component: ComponentNameComponent,
+} as ComponentMeta<typeof ComponentNameComponent>;
 
-const template: ComponentStory<typeof ComponentName> = (args) => {
+const template: ComponentStory<typeof ComponentNameComponent> = (args) => {
     return (
-        <ComponentName {...args} />
+        <ComponentNameComponent {...args} />
     )
 };
 

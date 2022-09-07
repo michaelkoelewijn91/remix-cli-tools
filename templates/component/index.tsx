@@ -6,7 +6,7 @@ export const links = () => [
 
 export interface ComponentNameInterface {}
 
-const ComponentName = ({ } : ComponentName) => {
+const ComponentName = ({ } : ComponentNameInterface) => {
     return (
         <div>ComponentName</div>
     )

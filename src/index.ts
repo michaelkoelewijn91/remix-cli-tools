@@ -43,11 +43,19 @@ const copyTemplate = async ({name, template }: { name: string, template: string}
             const from = `${require.main?.path}/templates/component`
             const to = `${CURRENT_ROUTE}/components/${name}`
             await fs.copy(from, to);
-            await fs.rename(`${to}/ComponentName.stories.tsx`, `${to}/${name}.stories.tsx`)
 
             fs.readFile(`${to}/index.tsx`, 'utf8', (err,data) => {
                 const fileContents = data.replaceAll(`ComponentName`, name);
                 fs.writeFile(`${to}/index.tsx`, fileContents, 'utf8', (err) => {
+                    if (err) return console.log(err);
+                });
+            })
+            
+            await fs.rename(`${to}/ComponentName.stories.tsx`, `${to}/${name}.stories.tsx`)
+
+            fs.readFile(`${to}/${name}.stories.tsx`, 'utf8', (err,data) => {
+                const fileContentsStory = data.replaceAll(`ComponentName`, name);
+                fs.writeFile(`${to}/${name}.stories.tsx`, fileContentsStory, 'utf8', (err) => {
                     if (err) return console.log(err);
                 });
             })
