@@ -55,6 +55,18 @@ const copyTemplate = async ({name, template }: { name: string, template: string}
             return;
 
         case 'route':
+            // Check if directory exists - create if nonexisting
+            await fs.ensureDir(`${CURRENT_ROUTE}/routes`);
+            // Copy file
+            const fromRoute = `${require.main?.path}/templates/route`
+            const toRoute = `${CURRENT_ROUTE}/routes/${name}`
+            await fs.copy(fromRoute, toRoute);
+            fs.readFile(`${toRoute}/index.tsx`, 'utf8', (err,data) => {
+                const fileContents = data.replaceAll(`RouteName`, name);
+                fs.writeFile(`${toRoute}/index.tsx`, fileContents, 'utf8', (err) => {
+                    if (err) return console.log(err);
+                });
+            })
             return;
     }
 

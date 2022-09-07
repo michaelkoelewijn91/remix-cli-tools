@@ -61,10 +61,10 @@ inquirer.prompt(QUESTIONS)
 var copyTemplate = function (_a) {
     var name = _a.name, template = _a.template;
     return __awaiter(void 0, void 0, void 0, function () {
-        var CURRENT_ROUTE, _b, from, to_1;
-        var _c;
-        return __generator(this, function (_d) {
-            switch (_d.label) {
+        var CURRENT_ROUTE, _b, from, to_1, fromRoute, toRoute_1;
+        var _c, _d;
+        return __generator(this, function (_e) {
+            switch (_e.label) {
                 case 0:
                     CURRENT_ROUTE = process.cwd();
                     _b = template;
@@ -72,21 +72,21 @@ var copyTemplate = function (_a) {
                         case 'component': return [3 /*break*/, 1];
                         case 'route': return [3 /*break*/, 5];
                     }
-                    return [3 /*break*/, 6];
+                    return [3 /*break*/, 8];
                 case 1: 
                 // Check if directory exists - create if nonexisting
                 return [4 /*yield*/, fs.ensureDir("".concat(CURRENT_ROUTE, "/components"))];
                 case 2:
                     // Check if directory exists - create if nonexisting
-                    _d.sent();
+                    _e.sent();
                     from = "".concat((_c = require.main) === null || _c === void 0 ? void 0 : _c.path, "/templates/component");
                     to_1 = "".concat(CURRENT_ROUTE, "/components/").concat(name);
                     return [4 /*yield*/, fs.copy(from, to_1)];
                 case 3:
-                    _d.sent();
+                    _e.sent();
                     return [4 /*yield*/, fs.rename("".concat(to_1, "/ComponentName.stories.tsx"), "".concat(to_1, "/").concat(name, ".stories.tsx"))];
                 case 4:
-                    _d.sent();
+                    _e.sent();
                     fs.readFile("".concat(to_1, "/index.tsx"), 'utf8', function (err, data) {
                         var fileContents = data.replaceAll("ComponentName", name);
                         fs.writeFile("".concat(to_1, "/index.tsx"), fileContents, 'utf8', function (err) {
@@ -95,8 +95,26 @@ var copyTemplate = function (_a) {
                         });
                     });
                     return [2 /*return*/];
-                case 5: return [2 /*return*/];
-                case 6: return [2 /*return*/];
+                case 5: 
+                // Check if directory exists - create if nonexisting
+                return [4 /*yield*/, fs.ensureDir("".concat(CURRENT_ROUTE, "/routes"))];
+                case 6:
+                    // Check if directory exists - create if nonexisting
+                    _e.sent();
+                    fromRoute = "".concat((_d = require.main) === null || _d === void 0 ? void 0 : _d.path, "/templates/route");
+                    toRoute_1 = "".concat(CURRENT_ROUTE, "/routes/").concat(name);
+                    return [4 /*yield*/, fs.copy(fromRoute, toRoute_1)];
+                case 7:
+                    _e.sent();
+                    fs.readFile("".concat(toRoute_1, "/index.tsx"), 'utf8', function (err, data) {
+                        var fileContents = data.replaceAll("RouteName", name);
+                        fs.writeFile("".concat(toRoute_1, "/index.tsx"), fileContents, 'utf8', function (err) {
+                            if (err)
+                                return console.log(err);
+                        });
+                    });
+                    return [2 /*return*/];
+                case 8: return [2 /*return*/];
             }
         });
     });
